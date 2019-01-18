@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  rabbitmq-docker-container:
+    image: rabbitmq:latest
+    hostname: localhost
+    ports:
+      - 5673:5672
+      - 15673:15672
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+    volumes:
+      - /data/rabbitmq
+  spring-boot-jpa-app:
+    image: spring-boot-jpa-image
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    depends_on:
+      - rabbitmq-docker-container
+    ports:
+      - 8081:8081
+    volumes:
+      - /data/spring-boot-app
