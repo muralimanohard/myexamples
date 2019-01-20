@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  eureka-naming-server:
+    image: eureka-naming-server
+    build:
+      context: ./eureka-naming-server
+      dockerfile: Dockerfile
+    ports:
+      - 8070:8070
+    volumes:
+      - /data/eureka-naming-server
+
+  forex-service:
+    image: forex-service
+    build:
+      context: ./forex-service
+      dockerfile: Dockerfile
+    ports:
+      - 8000:8000
+    volumes:
+      - /data/forex-service
+
+  currency-conversion-service:
+    image: currency-conversion-service
+    build:
+      context: ./currency-conversion-service
+      dockerfile: Dockerfile
+    ports:
+      - 8100:8100
+    volumes:
+      - /data/currency-conversion-service
