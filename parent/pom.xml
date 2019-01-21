@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.marcuseisele.springboot_microservices</groupId>
-    <artifactId>parent</artifactId>
+    <artifactId>counter-microservices-series-docker</artifactId>
     <version>1.0.0</version>
     <packaging>pom</packaging>
 
