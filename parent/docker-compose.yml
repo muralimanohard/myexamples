@@ -1,5 +1,14 @@
 version: '2'
 services:
+    rabbitmq:
+        container_name: rabbitmq-server
+        image: 'rabbitmq:management'
+        environment:
+            - RABBITMQ_DEFAULT_USER=guest
+            - RABBITMQ_DEFAULT_PASS=guest
+        ports:
+            - "5673:5672"
+            - "15673:15672"
     registryservice:
         build: registryservice
         mem_limit: 512M
@@ -10,6 +19,8 @@ services:
         mem_limit: 512M
         ports:
             - "8888:8888"
+        depends_on:
+            - rabbitmq    
     counterservice:
         build: counterservice
         mem_limit: 512M

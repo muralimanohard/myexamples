@@ -1,4 +1,4 @@
 FROM openjdk:8
-ADD target/currency-conversion-service.jar currency-conversion-service.jar
-EXPOSE 8100
-ENTRYPOINT ["java", "-jar", "currency-conversion-service.jar"]
+ADD target/currency-conversion-service.jar app.jar
+ENV JAVA_OPTS="-XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap  -XX:MaxRAMFraction=1 -XshowSettings:vm "
+ENTRYPOINT [ "sh", "-c", "java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -jar /app.jar" ]
