@@ -25,7 +25,7 @@ services:
         build: counterservice
         mem_limit: 512M
         ports:
-            - "8080:8080"
+            - "8889:8889"
     gatewayservice:
         build: gatewayservice
         mem_limit: 512M
