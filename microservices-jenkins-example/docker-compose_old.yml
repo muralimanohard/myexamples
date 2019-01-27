@@ -10,24 +10,24 @@ services:
             - "5673:5672"
             - "15673:15672"
     registryservice:
-        build: docker pull muralimanohard/microservicesexamples:registryservice
+        build: registryservice
         mem_limit: 512M
         ports:
             - "8761:8761"
     configservice:
-        build: docker pull muralimanohard/microservicesexamples:configservice
+        build: configservice
         mem_limit: 512M
         ports:
             - "8888:8888"
         depends_on:
             - rabbitmq    
     counterservice:
-        build: docker pull muralimanohard/microservicesexamples:counterservice
+        build: counterservice
         mem_limit: 512M
         ports:
             - "8889:8889"
     gatewayservice:
-        build: docker pull muralimanohard/microservicesexamples:gatewayservice
+        build: gatewayservice
         mem_limit: 512M
         ports:
             - "9999:9999"
