@@ -82,6 +82,9 @@
 				</executions>
 				<configuration>
 				<serverId>docker.io</serverId>
+								<username>muralimanohard</username>
+                <password>victory1</password>
+				
 					<repository>${docker.image.prefix}/${project.artifactId}</repository>
 					<username>muralimanohard</username> 
 					<password>victory1</password>
