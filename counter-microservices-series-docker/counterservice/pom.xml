@@ -94,6 +94,7 @@
 					</execution>
 				</executions>
 				<configuration>
+				<serverId>docker.io</serverId>
 					<repository>${docker.image.prefix}/${project.artifactId}</repository>
 					<useMavenSettingsForAuth>true</useMavenSettingsForAuth>
 					<buildArgs>

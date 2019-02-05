@@ -81,7 +81,10 @@
 					</execution>
 				</executions>
 				<configuration>
+				<serverId>docker.io</serverId>
 					<repository>${docker.image.prefix}/${project.artifactId}</repository>
+					<username>muralimanohard</username> 
+					<password>victory1</password>
 					<useMavenSettingsForAuth>true</useMavenSettingsForAuth>
 					<buildArgs>
 						<JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
