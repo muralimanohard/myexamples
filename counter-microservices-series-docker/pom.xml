@@ -21,6 +21,8 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
 		<spring-cloud.version>Finchley.BUILD-SNAPSHOT</spring-cloud.version>
+		<dockerfile.version>1.4.0</dockerfile.version>
+		<docker.image.prefix>muralimanohard</docker.image.prefix>
 	</properties>
 
 	<modules>

@@ -8,8 +8,12 @@
 		<artifactId>counter-microservices-series-docker</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
+	
+	<groupId>com.marcuseisele.springboot_microservices</groupId>
 	<artifactId>configservice</artifactId>
-
+	<version>0.0.1-SNAPSHOT</version>
+	<name>configservice</name>
+	
 
 	<description>Demo project for Spring Boot</description>
 
@@ -48,7 +52,31 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>dockerfile-maven-plugin</artifactId>
+				<version>${dockerfile.version}</version>
+				<!-- Wire up to the default build phases -->
+				<executions>
+					<execution>
+						<id>default</id>
+						<phase>install</phase>
+						<goals>
+							<goal>build</goal>
+							<goal>push</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<repository>${docker.image.prefix}/${project.artifactId}</repository>
+					<useMavenSettingsForAuth>true</useMavenSettingsForAuth>
+					<buildArgs>
+						<JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
+					</buildArgs>
+				</configuration>
+			</plugin>
 		</plugins>
+		<finalName>configservice-0.0.1-SNAPSHOT</finalName>
 	</build>
 
 	<repositories>
