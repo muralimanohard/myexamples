@@ -1,0 +1,47 @@
+pipeline {
+  environment {
+    registry = "muralimanohard/microservicesexamples"
+    registryCredential = 'dockerhub'
+    dockerImage = ''
+   }
+    agent any 
+    stages {
+        stage('Git Checkout') {
+            steps {
+                echo 'Git Checkout' 
+                git credentialsId: '25f21359-f1e3-40c4-a8e6-edbe69d4e1ab', url: 'https://github.com/muralimanohard/myexamples.git'
+            }
+        }
+        
+        stage('Maven Build') {
+            steps {
+                echo 'Maven Build' 
+                withMaven(maven : 'apache-maven-3.6.0') {
+                    sh 'mvn clean install -DskipTests'           
+                 }
+            }
+        }
+        
+    stage('Building image') {
+      steps{
+        script {
+          dockerImage = docker.build registry + ":$BUILD_NUMBER"
+        }
+      }
+    }
+    stage('Deploy Image') {
+      steps{
+        script {
+          docker.withRegistry( '', registryCredential ) {
+            dockerImage.push()
+          }
+        }
+      }
+    }
+    stage('Remove Unused docker image') {
+      steps{
+        sh "docker rmi $registry:$BUILD_NUMBER"
+      }
+    } 
+  }
+}
