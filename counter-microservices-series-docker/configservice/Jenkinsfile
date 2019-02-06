@@ -22,9 +22,8 @@ pipeline {
         }
         
         stage('Docker Purge') {
-          echo 'Deleting docker images'
            steps {
-
+              echo 'Deleting docker images'
               bat 'docker image prune -fa'
 
          deleteDir()
