@@ -17,7 +17,7 @@ pipeline {
             steps {
                 echo 'Maven Build' 
                 withMaven(maven : 'apache-maven-3.6.0') {
-                    bat 'mvn clean install -DskipTests'           
+                    'mvn clean install -DskipTests'           
                  }
             }
         }
