@@ -16,6 +16,7 @@ pipeline {
         stage('Maven Build') {
             steps {
                 echo 'Maven Build' 
+                cd 'counter-microservices-series-docker/configservice'
                 withMaven(maven : 'apache-maven-3.6.0') {
                     bat 'mvn clean install -DskipTests'           
                  }
@@ -40,7 +41,7 @@ pipeline {
     }
     stage('Remove Unused docker image') {
       steps{
-        sh "docker rmi $registry:$BUILD_NUMBER"
+        bat "docker rmi $registry:$BUILD_NUMBER"
       }
     } 
   }
