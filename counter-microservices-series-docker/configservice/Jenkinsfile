@@ -16,10 +16,13 @@ pipeline {
         stage('Maven Build') {
             steps {
                 echo 'Maven Build'
-                dir("counter-microservices-series-docker/configservice")
-                withMaven(maven : 'apache-maven-3.6.0') {
+                dir("counter-microservices-series-docker/configservice") {
+                                    withMaven(maven : 'apache-maven-3.6.0') {
                 bat "mvn clean install"
                  }
+                    
+                }
+
             }
         }
         
