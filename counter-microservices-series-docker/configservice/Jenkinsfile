@@ -12,13 +12,25 @@ pipeline {
             steps {
                 echo 'Maven Build'
                 dir("counter-microservices-series-docker/configservice") {
-                                    withMaven(maven : 'apache-maven-3.6.0') {
-                bat "mvn clean install -DskipTests"
-                 }
+                    withMaven(maven : 'apache-maven-3.6.0') {
+                       bat "mvn clean install -DskipTests"
+                    }
                     
                 }
 
             }
         }
+        
+        stage('Docker Purge') {
+          echo 'Deleting docker images'
+           steps {
+
+              bat 'docker image prune -fa'
+
+         deleteDir()
+
+         }
+
+     }
   }
 }
