@@ -16,9 +16,8 @@ pipeline {
         stage('Maven Build') {
             steps {
                 echo 'Maven Build' 
-                cd 'counter-microservices-series-docker/configservice'
                 withMaven(maven : 'apache-maven-3.6.0') {
-                    bat 'mvn clean install -DskipTests'           
+                bat 'mvn -f counter-microservices-series-docker/configservice/pom.xml clean install'
                  }
             }
         }
