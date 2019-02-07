@@ -27,7 +27,7 @@ pipeline {
                 withSonarQubeEnv('sonar-6') {
                     // Optionally use a Maven environment you've configured already
                     withMaven(maven:'apache-maven-3.6.0') {
-                        sh 'mvn clean install -DskipTests sonar:sonar'
+                        bat 'mvn clean install -DskipTests sonar:sonar'
                     }
                 }
             }
