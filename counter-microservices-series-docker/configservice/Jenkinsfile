@@ -21,6 +21,17 @@ pipeline {
             }
         }
         
+        stage('build && SonarQube analysis') {
+            steps {
+                withSonarQubeEnv('sonar-6') {
+                    // Optionally use a Maven environment you've configured already
+                    withMaven(maven:'apache-maven-3.6.0') {
+                        sh 'mvn clean package sonar:sonar'
+                    }
+                }
+            }
+        }
+        
         stage('Docker Purge') {
            steps {
               echo 'Deleting docker images'
