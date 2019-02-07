@@ -10,8 +10,6 @@ import org.springframework.cloud.config.server.EnableConfigServer;
 @EnableDiscoveryClient
 public class ConfigserviceApplication {
 
-	 String test1 = "delete";
-	
 	public static void main(String[] args) {
 		SpringApplication.run(ConfigserviceApplication.class, args);
 	}
