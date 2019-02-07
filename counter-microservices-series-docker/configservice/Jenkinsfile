@@ -32,4 +32,18 @@ pipeline {
 
      }
   }
-}
+  // This will send mail if any failure and also send mail if job is back to normal
+  post {
+      always {
+          script {
+              if (currentBuild.result == null) {
+                  currentBuild.result = 'SUCCESS'    
+              }
+          }    
+          step([$class: 'Mailer',
+            notifyEveryUnstableBuild: true,
+            recipients: "test@test.com",
+            sendToIndividuals: true])
+      }
+    }
+  }
