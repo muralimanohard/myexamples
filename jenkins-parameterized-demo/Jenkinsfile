@@ -1,0 +1,48 @@
+properties([parameters([choice(choices: ['master', 'featute1', 'feature2'], description: 'Select the branch to build', name: 'branch')])])
+
+pipeline {
+    agent any 
+    stages {
+        stage('Git Checkout') {
+            steps {
+                echo "Pulling changes from the branch selected by user {$params.branch}"
+                git credentialsId: '25f21359-f1e3-40c4-a8e6-edbe69d4e1ab', url: 'https://github.com/muralimanohard/myexamples.git', branch: "{$params.branch}"
+            }
+        }
+        
+        stage('Maven Build && SonarQube analysis') {
+            steps {
+            dir("jenkins-parameterized-demo") {
+                withSonarQubeEnv('sonar-6') {
+                    // Optionally use a Maven environment you've configured already
+                    withMaven(maven:'apache-maven-3.6.0') {
+                        bat 'mvn clean install -DskipTests sonar:sonar'
+                    }
+                }
+            }
+          } 
+        }
+        
+        stage("Quality Gate") {
+            steps {
+              timeout(time: 1, unit: 'HOURS') {
+                waitForQualityGate abortPipeline: true
+              }
+            }
+          }
+      }
+  // This will send mail if any failure and also send mail if job is back to normal
+  post {
+      always {
+          script {
+              if (currentBuild.result == null) {
+                  currentBuild.result = 'SUCCESS'    
+              }
+          }    
+          step([$class: 'Mailer',
+            notifyEveryUnstableBuild: true,
+            recipients: "test@test.com",
+            sendToIndividuals: true])
+      }
+    }
+  }
