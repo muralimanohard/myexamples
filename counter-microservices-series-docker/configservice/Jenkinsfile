@@ -8,28 +8,30 @@ pipeline {
             }
         }
         
-        stage('Maven Build') {
-            steps {
-                echo 'Maven Build'
-                dir("counter-microservices-series-docker/configservice") {
-                    withMaven(maven : 'apache-maven-3.6.0') {
-                       bat "mvn clean install -DskipTests"
-                    }
-                    
-                }
-
-            }
-        }
+//        stage('Maven Build') {
+//            steps {
+//                echo 'Maven Build'
+//                dir("counter-microservices-series-docker/configservice") {
+//                    withMaven(maven : 'apache-maven-3.6.0') {
+//                       bat "mvn clean install -DskipTests"
+//                    }
+//                    
+//                }
+//
+//            }
+//        }
         
-        stage('build && SonarQube analysis') {
+        stage('Maven Build && SonarQube analysis') {
             steps {
+            dir("counter-microservices-series-docker/configservice") {
                 withSonarQubeEnv('sonar-6') {
                     // Optionally use a Maven environment you've configured already
                     withMaven(maven:'apache-maven-3.6.0') {
-                        sh 'mvn clean package sonar:sonar'
+                        sh 'mvn clean install -DskipTests sonar:sonar'
                     }
                 }
             }
+          } 
         }
         
         stage('Docker Purge') {
