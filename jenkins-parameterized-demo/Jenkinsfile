@@ -1,6 +1,7 @@
-properties([parameters([choice(choices: ['master', 'featute1', 'feature2'], description: 'Select the branch to build', name: 'branch')])])
+
 
 pipeline {
+properties([parameters([choice(choices: ['master', 'featute1', 'feature2'], description: 'Select the branch to build', name: 'branch')])])
     agent any 
     stages {
         stage('Git Checkout') {
