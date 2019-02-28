@@ -1,0 +1,3 @@
+[INFO ] 28-02-2019 09:29:02.975 PM [http-nio-8089-exec-1]  com.example.demo.controller.SLF4JExample - This is an info log example
+[ERROR] 28-02-2019 09:29:02.975 PM [http-nio-8089-exec-1]  com.example.demo.controller.SLF4JExample - This is an error log example
+[WARN ] 28-02-2019 09:29:02.975 PM [http-nio-8089-exec-1]  com.example.demo.controller.SLF4JExample - This is a warn log example
